@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block body_attrs %} onload="funLoadForm();" {% endblock %}
+
+{% block main %}
+  <form  id="FeedForm" class="bg-light" method="post">
+    <div class="container">
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='img/Forms_logo.svg') }}" alt="" width="72" height="72" >
+        <!-- <h1>Feedback form</h1> -->
+        <br/>
+        <h2 id="MacroName">Please provide feedback to request: </h2>
+        <!-- <p class="lead" id="MacroName">Please provide feedback to request: </p> -->
+      </div>
+      <div class="form-group">
+          <h2>Cooperation</h2>
+          <label for="exampleFormControlSelect1">How satisfied are you with the professionalism and courtesy demonstrated by programmer?</label>
+          <select class="form-control" id="q1" name="q1" required>
+            {% for key, value in dic.items() %}
+            <option>{{ key }}</option>
+            {% endfor %}
+          </select>
+          <label for="exampleFormControlSelect1">How satisfied are you with the information and updates you received?</label>
+          <select class="form-control" id="q2"  name="q2" required>
+            {% for key, value in dic.items() %}
+            <option>{{ key }}</option>
+            {% endfor %}
+          </select>
+       </div>
+       <hr class="mb-4">
+       <div class="form-group">
+          <h2>General, Tool, Timing</h2>
+          <label for="exampleFormControlSelect1">How satisfied are you with the outcome of the macro request?</label>
+          <select class="form-control" id="q3" name="q3" required>
+            {% for key, value in dic.items() %}
+            <option>{{ key }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="exampleFormControlSelect1">How are you satisfied with the new tool/ tool update/ error fixing?</label>
+          <select class="form-control" id="q4"  name="q4" required>
+            {% for key, value in dic.items() %}
+            <option>{{ key }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="exampleFormControlSelect1">How satisfied are you with the time it took to fully resolve your issue?</label>
+          <select class="form-control" id="q5" name="q5" required>
+            {% for key, value in dic.items() %}
+            <option>{{ key }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <hr class="mb-4">
+        <div class="form-group">
+            <h2>Additional comments</h2>
+            <textarea class="form-control" id="AddText" rows="4" name="AddText" ></textarea>
+        </div>
+        <hr class="mb-4">
+        <div class="wrapper">
+              <button type="submit" id="sub"class="btn btn-primary btn-lg btn-block">Submit</button>
+        </div>
+
+    </div>
+  </form>
+{% endblock %}
+
+{% block script %}
+<script>
+
+function getQueryString(string) {
+  var params = location.search.substring(1).split("&");
+  for (var i = 0; i < params.length; i++) {
+      var temp = params[i].split("=");
+      if (string == temp[0]) {
+          return temp[1];
+      }
+  }
+};
+
+function funLoadForm() {
+  document.getElementById("MacroName").textContent += "'" + getQueryString("id") + "'";
+  document.getElementById("q1").selectedIndex = -1;
+  document.getElementById("q2").selectedIndex = -1;
+  document.getElementById("q3").selectedIndex = -1;
+  document.getElementById("q4").selectedIndex = -1;
+  document.getElementById("q5").selectedIndex = -1;
+};
+
+ </script>
+{% endblock %}
